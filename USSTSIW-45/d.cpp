@@ -2,40 +2,36 @@
 
 using namespace std;
 
+int main() {
+  int n, t;
 
-int main(){
-    int n, t, input, min=100001, size=0, start=0;
-    int arr[100000] = {0};
-    int len[100000] = {0};
-    
-    cin >> n >> t;
-    
-    for(int i=0;i<n;i++){
-        cin >> input;
-        arr[size] = 0;
-        len[size] = 0;
-        size++;
-        for(int j=start;j<size;j++){
-            arr[j] += input;
-            len[j] ++;
-            if(arr[j]>t){
-                arr[j] = arr[start];
-                len[j] = len[start];
-                start++;
-            }else if(arr[j]==t){
-                if(len[j]<min) min = len[j];
-                arr[j] = arr[start];
-                len[j] = len[start];
-                start++;
-            }
-        }
+  cin >> n >> t;
+
+  int sum[100000];
+
+  cin >> sum[0];
+  for (int i = 1; i < n; i++) {
+    cin >> sum[i];
+    sum[i] += sum[i - 1];
+  }
+
+  int m = 100001;
+  int lt = 0;
+
+  for (int i = 0; i < n; i++) {
+    int *emmmmmmm = lower_bound(sum + i, sum + n - 1, sum[i] + t);
+    int ehhhhhhh = *emmmmmmm - sum[i];
+    if (ehhhhhhh == t && emmmmmmm - sum - i < m) {
+      m = emmmmmmm - sum - i;
+    } else if (ehhhhhhh < t) {
+      break;
     }
-    
-    if(min==100001){
-        cout << "No";
-    }else{
-        cout << min;
-    }
-    
-    return 0;
-} 
+  }
+
+  if (m == 100001)
+    cout << "No";
+  else
+    cout << m;
+
+  return 0;
+}
