@@ -33,17 +33,10 @@ struct {
 
 int IsSnake(int x, int y) {
     node *temp = gameState.head;
-    node *lasttemp = gameState.head;
-    node *lastlasttemp = gameState.head;
     while (1) {
-        if (temp == (node *)0xfeeefeee) {
-            return 0;
-        }
         if (x == temp->x && y == temp->y)
             return 1;
         if (temp->next != NULL) {
-            lastlasttemp = lasttemp;
-            lasttemp = temp;
             temp = (node *)temp->next;
         } else {
             break;
