@@ -35,3 +35,4 @@
 # ppt
 note/ppt/*
 tmp/
+.vscode/settings.json
