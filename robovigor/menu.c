@@ -4,9 +4,9 @@
 #include <locale.h>
 
 typedef void (*MenuFunction)();
-typedef struct {
+typedef struct s{
     char title[20];
-    void *next;
+    struct s *next;
     MenuFunction func;
     int *value;
 } MenuItem;

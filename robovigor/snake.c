@@ -9,7 +9,7 @@ enum state { PLAY, WIN, LOSE };
 typedef struct {
     int x;
     int y;
-    void *next = NULL;
+    void *next;
 } node;
 
 struct {
@@ -113,8 +113,8 @@ void SnakeInit() {
 
 void AppleUpdate() {
     node *apple = gameState.apple;
-    srand(time(0));
     do {
+        srand(time(0));
         apple->x = rand() % (gameSetting.width - 2) + 1;
         apple->y = rand() % (gameSetting.height - 2) + 1;
     } while (IsSnake(apple->x, apple->y));
@@ -198,7 +198,7 @@ void RunGame() {
             SnakeUpdate();
         }
         if (gameState.tick % gameSetting.appleRefreshInterval == 0) {
-            AppleUpdate();
+            // AppleUpdate();
         }
         if (gameState.state == LOSE || gameState.state == WIN) {
             system("cls");
@@ -217,12 +217,12 @@ void RunGame() {
 }
 
 int main() {
-    gameSetting.width = 11;
-    gameSetting.height = 11;
-    gameSetting.snakeMoveInterval = 20;
+    gameSetting.width = 19;
+    gameSetting.height = 19;
+    gameSetting.snakeMoveInterval = 1;
     gameSetting.appleRefreshInterval = gameSetting.snakeMoveInterval * 50;
     gameSetting.detectInputInterval = 1;
-    gameSetting.intervalms = 20;
+    gameSetting.intervalms = 50;
     do {
         gameState.state = PLAY;
         gameState.tick = 0;
